@@ -53,6 +53,7 @@
   <div class="card">
     <h2 id="stationTitle">Station</h2>
     <p>Enter the correct code to complete this station.</p>
+    <p><i>Just key "123".</i></p>
 
     <input type="text" id="answer" placeholder="Enter code" />
     <br />
@@ -66,11 +67,11 @@
 const REQUIRED_CODE = "123";
 
 /* ===== GET STATION ID FROM URL ===== */
-const params = new URLSearchParams(window.location.search);
-const stationId = params.get("station") || "unknown_station";
+// const params = new URLSearchParams(window.location.search);
+const stationId = "OLED"
 
 document.getElementById("stationTitle").innerText =
-  "Station: " + stationId;
+  stationId + " Station";
 
 /* ===== LOAD OR INIT PROGRESS ===== */
 function loadProgress() {
