@@ -1,1 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Event Station</title>
 
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 30px;
+      background: #f4f4f4;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    input {
+      padding: 10px;
+      width: 80%;
+      font-size: 16px;
+      margin-top: 10px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .success {
+      color: green;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+
+    .error {
+      color: red;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h2 id="stationTitle">Station</h2>
+    <p>Enter the correct code to complete this station.</p>
+
+    <input type="text" id="answer" placeholder="Enter code" />
+    <br />
+    <button onclick="submitAnswer()">Submit</button>
+
+    <div id="message"></div>
+  </div>
+
+<script>
+/* ===== CONFIG ===== */
+const REQUIRED_CODE = "123";
+
+/* ===== GET STATION ID FROM URL ===== */
+const params = new URLSearchParams(window.location.search);
+const stationId = params.get("station") || "unknown_station";
+
+document.getElementById("stationTitle").innerText =
+  "Station: " + stationId;
+
+/* ===== LOAD OR INIT PROGRESS ===== */
+function loadProgress() {
+  let progress = localStorage.getItem("eventProgress");
+  if (!progress) {
+    progress = {
+      stations: {},
+      completedAt: null
+    };
+    localStorage.setItem("eventProgress", JSON.stringify(progress));
+    return progress;
+  }
+  return JSON.parse(progress);
+}
+
+/* ===== SAVE PROGRESS ===== */
+function saveProgress(progress) {
+  localStorage.setItem("eventProgress", JSON.stringify(progress));
+}
+
+/* ===== SUBMIT HANDLER ===== */
+function submitAnswer() {
+  const input = document.getElementById("answer").value.trim();
+  const message = document.getElementById("message");
+
+  if (input !== REQUIRED_CODE) {
+    message.innerHTML = `<div class="error">❌ Wrong code</div>`;
+    return;
+  }
+
+  const progress = loadProgress();
+  progress.stations[stationId] = true;
+  saveProgress(progress);
+
+  message.innerHTML = `
+    <div class="success">
+      ✅ Station completed!
+    </div>
+  `;
+}
+</script>
+
+</body>
+</html>
