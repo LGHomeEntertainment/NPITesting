@@ -242,18 +242,20 @@ async function openScanner() {
     scanner = new Html5Qrcode("reader");
   }
 
-await scanner.stop().catch(() => {});
-
-  scanner.start(
+try {
+await scanner.start(
     { facingMode: "environment" },
     { fps: 6, qrbox: 260, disableFlip: true },
     onScan
   );
+} catch(err) {
+console.error("Camera start failed", err);
+}
 }
 
 function closeScanner() {
   document.getElementById("scannerModal").style.display = "none";
-  scanner?.stop();
+  scanner?.stop().catch(() => {});
 }
 
 function onScan(text) {
