@@ -14,7 +14,7 @@
     Start Scan
   </button>
 
-  <div id="reader" style="width:300px;margin:20px auto;"></div>
+  <div id="reader" style="width:100wv; max-width: 420px; margin:0 auto;"></div>
 
   <p id="result"></p>
 
@@ -28,7 +28,12 @@ function startScan() {
 
   scanner.start(
     { facingMode: "environment" },
-    { fps: 10, qrbox: 250 },
+    { 
+      fps: 5,   // smaller = more stable
+      qrbox: { width: 260, height: 260 },
+      aspectRatio: 1.0,
+      disableFlip: true
+    },
     qrCodeMessage => {
       document.getElementById("result").innerText =
         "✅ Scanned: " + qrCodeMessage;
