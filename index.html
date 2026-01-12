@@ -85,6 +85,72 @@ h2 {
   margin: 10px auto;
   padding: 10px 20px;
 }
+
+.completed {
+position: fixed; 
+inset: 0;
+background: rgba(0,0,0,0.85);
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 999;
+}
+
+.hidden {
+display: none;
+}
+
+.pass-card {
+position: relative;
+max-width: 320px;
+background: #fff;
+border-radius: 16px;
+padding: 24px 28px;
+text-align: center;
+width: 90%;
+}
+
+.pass-card h2 {
+margin: 0 0 8px;
+}
+
+.timestamp {
+margin: 12px 0;
+color: #555;
+font-size: 14px;
+}
+
+.note {
+margin-top: 16px;
+font-size: 14px;
+}
+
+.pulse {
+position: absolute;
+inset: -6px;
+border-radius: 20px;
+border: 2px solid #4CAF50;
+animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+0% { opacity: 0.2; }
+50% { opacity: 0.6; }
+100% { opacity: 0.2; }
+}
+
+.redeem-btn {
+margin-top: 18px;
+padding: 12px;
+width: 100%;
+border: none;
+border-radius: 10px;
+background: #d32f2f;
+color: #fff;
+font-size: 15px;
+font-weight: bold;
+}
+
 </style>
 </head>
 
@@ -117,12 +183,41 @@ Complete all stations to redeem a prize
   </div>
 </div>
 
+<div id="completedPass" class="completed hidden">
+  <div class="pass-card">
+    <h2>🎉 Pass Completed!</h2>
+    <p>All stations cleared</p>
+
+    <div class="timestamp" id="passTime"></div>
+
+    <p class="note">
+      Show this screen to staff to redeem<br>
+      <strong>1 claw machine token</strong><br>
+      Good Luck!
+    </p>
+    <button id="redeemBtn" class="redeem-btn">
+Redeemed!
+</button>
+
+    <div class="pulse"></div>
+  </div>
+</div>
+
+
 <div id="scannerModal">
   <div id="reader"></div>
   <button id="closeBtn" onclick="closeScanner()">Cancel</button>
 </div>
 
+
 <script>
+window.addEventListener("load", () => {
+updateStars()
+if (allStationsCompleted()) {
+showCompletedPass()
+}
+
+
 let scanner;
 
 function loadProgress() {
@@ -170,10 +265,44 @@ function onScan(text) {
   saveProgress(p);
 
   updateStars();
+if (allStationsCompleted()) {
+showCompletedPass() 
+}
   closeScanner();
 }
 
 updateStars();
+
+function allStationsCompleted() {
+let p = loadProgress();
+return Object.values(p).every(v => v == true);
+}
+
+function showCompletedPass() {
+let pass = document.getElementById("completedPass")
+let timeEl = document.getElementById("passTime")
+
+pass.classList.remove("hidden")
+
+updateTime();
+setInterval(updateTime, 1000)
+
+function updateTime() {
+let now = new Date()
+timeEl.textContent = now.toLocaleString()
+}}
+
+document.getElementById("redeemBtn").addEventListener("click", () => {
+let confirmRedeem = confirm("Redeem completed pass?\nThis will reset all progress.")
+if (!confirmRedeem) return
+
+// localStorage.removeItem("stationProgress")
+
+document.getElementById("completedPass").classList.add("hidden")
+updateStars()
+}
+
+
 </script>
 
 </body>
