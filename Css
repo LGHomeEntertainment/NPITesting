@@ -1,40 +1,47 @@
-<style>
-  body {
-    margin: 0;
-    height: 100vh;
-    font-family: system-ui, -apple-system, sans-serif;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-  }
+function showStation() {
+  const card = document.getElementById("card");
+  card.innerHTML = `
+    <h2>${stationName} Station</h2>
+    <p>Enter the correct code to complete this station.</p>
+    <p><i>Just key "123".</i></p>
 
-  .card {
-    background: #ffffff;
-    color: #333;
-    width: 90%;
-    max-width: 420px;
-    padding: 24px;
-    border-radius: 18px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.35);
-    text-align: center;
-    margin-top: 40px; /* pushes slightly downward */
-  }
+    <input type="text" id="answer" placeholder="Enter code" />
+    <br />
+    <button onclick="submitAnswer()">Submit</button>
 
-  h2 {
-    margin-top: 0;
-  }
+    <div id="message"></div>
+  `;
+}
 
-  input {
-    width: 80%;
-    padding: 12px;
-    font-size: 16px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    margin-top: 12px;
-  }
+function showStationCompleted() {
+  const card = document.getElementById("card");
+  card.innerHTML = `
+    <h2>✅ ${stationName} Completed</h2>
+    <p>Visit the other stations to complete your pass.</p>
+  `;
+}
+
+function showPass() {
+  const card = document.getElementById("card");
+  card.innerHTML = `
+    <h2>🎉 PASS COMPLETED</h2>
+    <p>All stations completed.</p>
+    <p><strong>Show this screen to staff</strong></p>
+
+    <div style="
+      margin-top:20px;
+      padding:16px;
+      border-radius:12px;
+      background:#e8f5e9;
+      color:#1a7f37;
+      font-size:18px;
+      font-weight:bold;
+      animation:pulse 2s infinite;
+    ">
+      ✔ VERIFIED
+    </div>
+  `;
+}  }
 
   button {
     margin-top: 16px;
