@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QR Scan Test</title>
+
+  <script src="https://unpkg.com/html5-qrcode"></script>
+</head>
+<body style="text-align:center;padding-top:20px">
+
+  <h2>Scan Station QR</h2>
+
+  <button onclick="startScan()" style="font-size:18px;padding:12px 20px">
+    Start Scan
+  </button>
+
+  <div id="reader" style="width:300px;margin:20px auto;"></div>
+
+  <p id="result"></p>
+
+<script>
+let scanner;
+
+function startScan() {
+  document.getElementById("result").innerText = "";
+
+  scanner = new Html5Qrcode("reader");
+
+  scanner.start(
+    { facingMode: "environment" },
+    { fps: 10, qrbox: 250 },
+    qrCodeMessage => {
+      document.getElementById("result").innerText =
+        "✅ Scanned: " + qrCodeMessage;
+
+      scanner.stop();
+    },
+    errorMessage => {
+      // ignore scan errors
+    }
+  );
+}
+</script>
+
+</body>
+</html>
