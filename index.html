@@ -22,7 +22,9 @@ h2 {
   position: relative;
   max-width: 420px;
   margin: 20px auto;
-  background: #eaeaea;
+
+  background: #fdfdfd;
+  border: 4px solid #000;
   border-radius: 16px;
   padding: 20px;
   height: 420px;
@@ -32,14 +34,22 @@ h2 {
   position: absolute;
   width: 140px;
   height: 80px;
-  background: white;
+
+  background: #ffffff;
+  border: 3px dashed #333;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  font-size: 16px;
   cursor: pointer;
+  user-select: none;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.station.active {
+  background: #dff5ff;
 }
 
 .star {
@@ -71,4 +81,100 @@ h2 {
 }
 
 #closeBtn {
-  display: block
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+}
+</style>
+</head>
+
+<body>
+
+<h2>Event Stations</h2>
+<p style="text-align:center">
+Complete all stations to redeem a prize
+</p>
+
+<div id="map">
+  <div class="station" id="OLED" onclick="openScanner()">
+    OLED
+    <span class="star" id="star-OLED">⭐</span>
+  </div>
+
+  <div class="station" id="ULTRA" onclick="openScanner()">
+    ULTRA
+    <span class="star" id="star-ULTRA">⭐</span>
+  </div>
+
+  <div class="station" id="QNED" onclick="openScanner()">
+    QNED
+    <span class="star" id="star-QNED">⭐</span>
+  </div>
+
+  <div class="station" id="MRGB" onclick="openScanner()">
+    MRGB
+    <span class="star" id="star-MRGB">⭐</span>
+  </div>
+</div>
+
+<div id="scannerModal">
+  <div id="reader"></div>
+  <button id="closeBtn" onclick="closeScanner()">Cancel</button>
+</div>
+
+<script>
+let scanner;
+
+function loadProgress() {
+  return JSON.parse(localStorage.getItem("eventProgress") || "{}");
+}
+
+function saveProgress(p) {
+  localStorage.setItem("eventProgress", JSON.stringify(p));
+}
+
+function updateStars() {
+  const p = loadProgress();
+  Object.keys(p).forEach(id => {
+    const star = document.getElementById("star-" + id);
+    if (star) star.style.display = "inline";
+  });
+}
+
+function openScanner() {
+  document.getElementById("scannerModal").style.display = "block";
+
+  if (!scanner) {
+    scanner = new Html5Qrcode("reader");
+  }
+
+  scanner.start(
+    { facingMode: "environment" },
+    { fps: 6, qrbox: 260, disableFlip: true },
+    onScan,
+    () => {}
+  );
+}
+
+function closeScanner() {
+  document.getElementById("scannerModal").style.display = "none";
+  scanner?.stop();
+}
+
+function onScan(text) {
+  if (!text.startsWith("STATION:")) return;
+
+  const stationId = text.split(":")[1];
+  const p = loadProgress();
+  p[stationId] = true;
+  saveProgress(p);
+
+  updateStars();
+  closeScanner();
+}
+
+updateStars();
+</script>
+
+</body>
+</html>
