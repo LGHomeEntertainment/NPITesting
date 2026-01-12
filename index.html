@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Event Map</title>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+}
+
+#map {
+  position: relative;
+  max-width: 420px;
+  margin: 20px auto;
+  background: #eaeaea;
+  border-radius: 16px;
+  padding: 20px;
+  height: 420px;
+}
+
+.station {
+  position: absolute;
+  width: 140px;
+  height: 80px;
+  background: white;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.star {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  display: none;
+}
+
+/* Station positions (ROUGH, adjustable later) */
+#OLED { top: 20px; left: 20px; }
+#ULTRA { top: 20px; right: 20px; }
+#QNED { bottom: 20px; left: 20px; }
+#MRGB { bottom: 20px; right: 20px; }
+
+/* Scanner modal */
+#scannerModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 1000;
+}
+
+#reader {
+  width: 100%;
+  max-width: 420px;
+  margin: 40px auto;
+}
+
+#closeBtn {
+  display: block
