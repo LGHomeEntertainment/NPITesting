@@ -1,80 +1,39 @@
-function showStation() {
-  const card = document.getElementById("card");
-  card.innerHTML = `
-    <h2>${stationName} Station</h2>
-    <p>Enter the correct code to complete this station.</p>
-    <p><i>Just key "123".</i></p>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Camera Test</title>
+</head>
+<body style="text-align:center;padding-top:50px">
 
-    <input type="text" id="answer" placeholder="Enter code" />
-    <br />
-    <button onclick="submitAnswer()">Submit</button>
+  <h2>Landing Page</h2>
+  <p>Tap to scan station QR</p>
 
-    <div id="message"></div>
-  `;
+  <button onclick="startCamera()" style="font-size:18px;padding:12px 20px">
+    Scan Station QR
+  </button>
+
+  <p id="status"></p>
+
+<script>
+async function startCamera() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "environment" }
+    });
+
+    document.getElementById("status").innerText =
+      "✅ Camera access granted";
+
+    // Stop immediately (test only)
+    stream.getTracks().forEach(t => t.stop());
+
+  } catch (err) {
+    document.getElementById("status").innerText =
+      "❌ Camera access denied";
+  }
 }
+</script>
 
-function showStationCompleted() {
-  const card = document.getElementById("card");
-  card.innerHTML = `
-    <h2>✅ ${stationName} Completed</h2>
-    <p>Visit the other stations to complete your pass.</p>
-  `;
-}
-
-function showPass() {
-  const card = document.getElementById("card");
-  card.innerHTML = `
-    <h2>🎉 PASS COMPLETED</h2>
-    <p>All stations completed.</p>
-    <p><strong>Show this screen to staff</strong></p>
-
-    <div style="
-      margin-top:20px;
-      padding:16px;
-      border-radius:12px;
-      background:#e8f5e9;
-      color:#1a7f37;
-      font-size:18px;
-      font-weight:bold;
-      animation:pulse 2s infinite;
-    ">
-      ✔ VERIFIED
-    </div>
-  `;
-}  }
-
-  button {
-    margin-top: 16px;
-    padding: 12px 24px;
-    font-size: 16px;
-    border: none;
-    border-radius: 8px;
-    background: #2c5364;
-    color: white;
-    cursor: pointer;
-  }
-
-  button:active {
-    transform: scale(0.98);
-  }
-
-  .success {
-    color: #1a7f37;
-    font-weight: bold;
-    margin-top: 16px;
-  }
-
-  .error {
-    color: #c62828;
-    margin-top: 16px;
-  }
-
-  .footer-text {
-    position: fixed;
-    bottom: 24px;
-    font-size: 14px;
-    opacity: 0.85;
-    text-align: center;
-    padding: 0 20px;
-  }
-</style>
+</body>
+</html>
