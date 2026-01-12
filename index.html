@@ -213,9 +213,8 @@ Redeemed!
 <script>
 window.addEventListener("load", () => {
 updateStars()
-if (allStationsCompleted()) {
-showCompletedPass()
-}
+if (allStationsCompleted()) showCompletedPass()
+})
 
 
 let scanner;
@@ -236,18 +235,19 @@ function updateStars() {
   });
 }
 
-function openScanner() {
+async function openScanner() {
   document.getElementById("scannerModal").style.display = "block";
 
   if (!scanner) {
     scanner = new Html5Qrcode("reader");
   }
 
+await scanner.stop().catch(() => {});
+
   scanner.start(
     { facingMode: "environment" },
     { fps: 6, qrbox: 260, disableFlip: true },
-    onScan,
-    () => {}
+    onScan
   );
 }
 
@@ -273,9 +273,10 @@ showCompletedPass()
 
 updateStars();
 
+let STATIONS = ["OLED", "QNED", "ULTRA", "MRGB"]
 function allStationsCompleted() {
 let p = loadProgress();
-return Object.values(p).every(v => v == true);
+return STATIONS.every(id => p[id] == true);
 }
 
 function showCompletedPass() {
@@ -296,11 +297,11 @@ document.getElementById("redeemBtn").addEventListener("click", () => {
 let confirmRedeem = confirm("Redeem completed pass?\nThis will reset all progress.")
 if (!confirmRedeem) return
 
-// localStorage.removeItem("stationProgress")
+localStorage.removeItem("eventProgress")
 
 document.getElementById("completedPass").classList.add("hidden")
 updateStars()
-}
+})
 
 
 </script>
