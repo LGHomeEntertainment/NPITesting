@@ -135,19 +135,7 @@ margin-top: 16px;
 font-size: 14px;
 }
 
-.pulse {
-position: absolute;
-inset: -6px;
-border-radius: 20px;
-border: 2px solid #4CAF50;
-animation: pulse 2s infinite;
-}
 
-@keyframes pulse {
-0% { opacity: 0.2; }
-50% { opacity: 0.6; }
-100% { opacity: 0.2; }
-}
 
 .redeem-btn {
 margin-top: 18px;
@@ -168,6 +156,20 @@ transform: translate(-50%, 50%);
 border: 3px solid #ff9800;
 background: #fff3cd;
 display: none;
+}
+
+.pulse {
+position: absolute;
+inset: -6px;
+border-radius: 20px;
+border: 2px solid #4CAF50;
+animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+0% { opacity: 0.2; }
+50% { opacity: 0.6; }
+100% { opacity: 0.2; }
 }
 
 .redeem.pulse {
@@ -222,7 +224,7 @@ Show Completed Pass
 
 <div id="completedPass" class="completed hidden">
   <div class="pass-card">
-<button class="close-btn" onclick="hideCompletedPass()">X</button>
+<button id="closeBtn" class="close-btn">X</button>
     <h2>🎉 Pass Completed!</h2>
     <p>All stations cleared</p>
 
@@ -267,26 +269,27 @@ Redeem!
 let DEV_MODE = true;
 if (DEV_MODE) resetDevProgress() 
 let STATIONS = ["OLED", "QNED", "ULTRA", "MRGB"]
-
-console.log("JS loaded")
-console.log("Progress on load:", localStorage.getItem("eventProgress"))
-
+let scanner;
 
 
 window.addEventListener("load", () => {
 updateStars()
 document.getElementById("redeemBtn").addEventListener("click", onRedeem);
+document.getElementById("closeBtn").addEventListener("click", hideCompletedPass);
 
-// if (allStationsCompleted()) showCompletedPass()
 let p = loadProgress()
 if (p.redeemed) {
 showRedeemed()
 } else if (allStationsCompleted()) {
-// showCompletedPass()
 showRedemptionBooth()
 }
 })
 
+
+
+
+
+// TESTING
 function resetDevProgress() {
 let clean = {
 OLED: true,
@@ -300,26 +303,11 @@ console.log("DEV_MODE: progress reset", clean)
 }
 
 
-let scanner;
 
-function loadProgress() {
-  return JSON.parse(localStorage.getItem("eventProgress") || "{}");
-}
 
-function saveProgress(p) {
-  localStorage.setItem("eventProgress", JSON.stringify(p));
-}
 
-function updateStars() {
-  const p = loadProgress();
-  STATIONS.forEach(id => {
-    const star = document.getElementById("star-" + id);
-    if (!star) return;
 
-    star.style.display = p[id] == true ? "inline" : "none";
-  });
-}
-
+// CAMERA
 async function openScanner() {
   document.getElementById("scannerModal").style.display = "block";
 
@@ -363,11 +351,33 @@ updateStars();
 
 
 
+// CHECK STATUS
+function loadProgress() {
+  return JSON.parse(localStorage.getItem("eventProgress") || "{}");
+}
+
+function saveProgress(p) {
+  localStorage.setItem("eventProgress", JSON.stringify(p));
+}
+
+function updateStars() {
+  const p = loadProgress();
+  STATIONS.forEach(id => {
+    const star = document.getElementById("star-" + id);
+    if (!star) return;
+
+    star.style.display = p[id] == true ? "inline" : "none";
+  });
+}
+
 function allStationsCompleted() {
 let p = loadProgress();
 return STATIONS.every(id => p[id] == true);
 }
 
+
+
+// COMPLETED PASS/REDEEM PASS
 function showCompletedPass() {
 let pass = document.getElementById("completedPass")
 let timeEl = document.getElementById("passTime")
@@ -381,6 +391,10 @@ function updateTime() {
 let now = new Date()
 timeEl.textContent = now.toLocaleString()
 }}
+
+function hideCompletedPass() {
+document.getElementById("completedPass").classList.add("hidden")
+}
 
 
 function onRedeem() {
@@ -414,9 +428,7 @@ booth.style.display = "flex"
 booth.classList.add("pulse")
 }
 
-function hideCompletedPass() {
-document.getElementById("completedPass").classList.add("hidden")
-}
+
 
 function openRedeemPass() {
 showCompletedPass()
