@@ -164,7 +164,7 @@ font-weight: bold;
 .redeem {
 bottom: 50%;
 left: 50%;
-transform: translate(-50%, 50%)
+transform: translate(-50%, 50%);
 border: 3px solid #ff9800;
 background: #fff3cd;
 display: none;
@@ -213,7 +213,6 @@ Complete all stations to redeem a prize
 
   <div class="station redeem" id="REDEEM" onclick="openRedeemPass()">
     🎁 Redeem your token here 🎁
-    <span class="star" id="star-MRGB">⭐</span>
   </div>
 </div>
 
@@ -266,18 +265,6 @@ Redeem!
 
 <script>
 window.addEventListener("load", () => {
-updateStars()
-document.getElementById("redeemBtn").addEventListener("click", onRedeem);
-
-// if (allStationsCompleted()) showCompletedPass()
-let p = loadProgress()
-if (p.redeemed) {
-showRedeemed()
-} else if (allstationsCompleted()) {
-// showCompletedPass()
-showRedemptionBooth()
-}
-})
 
 if (isDevMode()) {
 saveProgress({
@@ -287,6 +274,21 @@ ULTRA: true,
 MRGB: true
 })
 }
+
+updateStars()
+document.getElementById("redeemBtn").addEventListener("click", onRedeem);
+
+// if (allStationsCompleted()) showCompletedPass()
+let p = loadProgress()
+if (p.redeemed) {
+showRedeemed()
+} else if (allStationsCompleted()) {
+// showCompletedPass()
+showRedemptionBooth()
+}
+})
+
+
 
 
 let scanner;
