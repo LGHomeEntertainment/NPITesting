@@ -264,17 +264,16 @@ Redeem!
 
 
 <script>
+let DEV_MODE = true;
+if (DEV_MODE) resetDevProgress() 
+let STATIONS = ["OLED", "QNED", "ULTRA", "MRGB"]
+
+console.log("JS loaded")
+console.log("Progress on load:", localStorage.getItem("eventProgress"))
+
+
+
 window.addEventListener("load", () => {
-
-if (isDevMode()) {
-saveProgress({
-OLED: true,
-QNED: true,
-ULTRA: true,
-MRGB: true
-})
-}
-
 updateStars()
 document.getElementById("redeemBtn").addEventListener("click", onRedeem);
 
@@ -288,7 +287,17 @@ showRedemptionBooth()
 }
 })
 
-
+function resetDevProgress() {
+let clean = {
+OLED: true,
+QNED: true,
+ULTRA: true,
+MRGB: false,
+redeemed: false
+}
+localStorage.setItem("eventProgress", JSON.stringify(clean))
+console.log("DEV_MODE: progress reset", clean)
+}
 
 
 let scanner;
@@ -303,9 +312,11 @@ function saveProgress(p) {
 
 function updateStars() {
   const p = loadProgress();
-  Object.keys(p).forEach(id => {
+  STATIONS.forEach(id => {
     const star = document.getElementById("star-" + id);
-    if (star) star.style.display = "inline";
+    if (!star) return;
+
+    star.style.display = p[id] == true ? "inline" : "none";
   });
 }
 
@@ -351,7 +362,7 @@ showRedemptionBooth()
 updateStars();
 
 
-let STATIONS = ["OLED", "QNED", "ULTRA", "MRGB"]
+
 function allStationsCompleted() {
 let p = loadProgress();
 return STATIONS.every(id => p[id] == true);
@@ -417,10 +428,6 @@ document.getElementById("showPassBtn").style.display =
 allStationsCompleted() && !p.redeemed ? "block" : "none";
 }
 
-function isDevMode() {
-return new
-URLSearchParams(window.location.search).get("dev") == "1";
-}
 
 </script>
 
