@@ -114,6 +114,16 @@ width: 90%;
 margin: 0 0 8px;
 }
 
+.close-btn {
+position: absolute;
+top: 10px;
+right: 12px;
+border: none;
+background: transparent;
+font-size: 22px;
+cursor: pointer;
+}
+
 .timestamp {
 margin: 12px 0;
 color: #555;
@@ -202,13 +212,18 @@ Complete all stations to redeem a prize
   </div>
 
   <div class="station redeem" id="REDEEM" onclick="openRedeemPass()">
-    PRESENT! Redeem your token here
+    🎁 Redeem your token here 🎁
     <span class="star" id="star-MRGB">⭐</span>
   </div>
 </div>
 
+<button id="showPassBtn" style="display:none;" onclick="showCompletedPass()"> 
+Show Completed Pass
+</button>
+
 <div id="completedPass" class="completed hidden">
   <div class="pass-card">
+<button class="close-btn" onclick="hideCompletedPass()">X</button>
     <h2>🎉 Pass Completed!</h2>
     <p>All stations cleared</p>
 
@@ -376,6 +391,19 @@ booth.style.display = "flex"
 booth.classList.add("pulse")
 }
 
+function hideCompletedPass() {
+document.getElementById("completedPass").classList.add("hidden")
+}
+
+function openRedeemPass() {
+showCompletedPass()
+}
+
+function updateShowPassButton() {
+let p = loadProgress()
+document.getElementById("showPassBtn").style.display = 
+allStationsCompleted() && !p.redeemed ? "block" : "none";
+}
 
 </script>
 
