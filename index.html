@@ -196,9 +196,24 @@ Complete all stations to redeem a prize
       Good Luck!
     </p>
     <button id="redeemBtn" class="redeem-btn">
-Redeemed!
+Redeem!
 </button>
 
+    <div class="pulse"></div>
+  </div>
+</div>
+
+<div id="redeemedOverlay" class="completed hidden">
+  <div class="pass-card">
+    <h2>❌ Pass Used</h2>
+    <p>Token has been redeemed.</p>
+
+    <div class="timestamp" id="redeemedTime"></div>
+
+    <p class="note">
+      
+    </p>
+  
     <div class="pulse"></div>
   </div>
 </div>
@@ -213,7 +228,13 @@ Redeemed!
 <script>
 window.addEventListener("load", () => {
 updateStars()
-if (allStationsCompleted()) showCompletedPass()
+// if (allStationsCompleted()) showCompletedPass()
+let p = loadProgress()
+if (p.redeemed) {
+showRedeemed()
+} else if (allstationsCompleted()) {
+showCompletedPass()
+}
 })
 
 
@@ -295,15 +316,31 @@ let now = new Date()
 timeEl.textContent = now.toLocaleString()
 }}
 
+
 document.getElementById("redeemBtn").addEventListener("click", () => {
-let confirmRedeem = confirm("Redeem completed pass?\nThis will reset all progress.")
+let confirmRedeem = confirm("Confirm redemption?\nThe pass will become invalid.")
 if (!confirmRedeem) return
 
-localStorage.removeItem("eventProgress")
+// localStorage.removeItem("eventProgress")
+
+let p = loadProgress()
+p.redeemed = true
+p.redeemedAt = new Date().toLocaleString()
+saveProgress(p)
 
 document.getElementById("completedPass").classList.add("hidden")
-updateStars()
+showRedeemed()
 })
+
+function showRedeemed() {
+let pass = document.getElementById("redeemedOverlay")
+let timeEl = document.getElementById("redeemedTime")
+
+pass.classList.remove("hidden")
+let p = loadProgress()
+if (p.redeemedAt) {
+timeEl.textContent = "Redeemed at: " + new Date(p.redeemedAt).toLocaleString() 
+}}
 
 
 </script>
