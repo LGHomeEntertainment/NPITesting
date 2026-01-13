@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Event Map</title>
+
+<script src="https://unpkg.com/html5-qrcode"></script>
+
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  margin: 0;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+}
+
+#map {
+  position: relative;
+  max-width: 420px;
+  margin: 20px auto;
+
+  background: #fdfdfd;
+  border: 4px solid #000;
+  border-radius: 16px;
+  padding: 20px;
+  height: 420px;
+}
+
+.station {
+  position: absolute;
+  width: 140px;
+  height: 80px;
+
+  background: #ffffff;
+  border: 3px dashed #333;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.station.active {
+  background: #dff5ff;
+}
+
+.star {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  display: none;
+}
+
+/* Station positions (ROUGH, adjustable later) */
+#OLED { top: 20px; left: 20px; }
+#ULTRA { top: 20px; right: 20px; }
+#QNED { bottom: 20px; left: 20px; }
+#MRGB { bottom: 20px; right: 20px; }
+
+/* Scanner modal */
+#scannerModal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 1000;
+}
+
+#reader {
+  width: 100%;
+  max-width: 420px;
+  margin: 40px auto;
+}
+
+#closeBtn {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+}
+
+.completed {
+position: fixed; 
+inset: 0;
+background: rgba(0,0,0,0.85);
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 999;
+}
+
+.hidden {
+display: none;
+}
+
+.pass-card {
+position: relative;
+max-width: 320px;
+background: #fff;
+border-radius: 16px;
+padding: 24px 28px;
+text-align: center;
+width: 90%;
+}
+
+.pass-card h2 {
+margin: 0 0 8px;
+}
+
+.close-btn {
+position: absolute;
+top: 10px;
+right: 12px;
+border: none;
+background: transparent;
+font-size: 22px;
+cursor: pointer;
+}
+
+.timestamp {
+margin: 12px 0;
+color: #555;
+font-size: 14px;
+}
+
+.note {
+margin-top: 16px;
+font-size: 14px;
+}
+
+.pulse {
+position: absolute;
+inset: -6px;
+border-radius: 20px;
+border: 2px solid #4CAF50;
+animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+0% { opacity: 0.2; }
+50% { opacity: 0.6; }
+100% { opacity: 0.2; }
+}
+
+.redeem-btn {
+margin-top: 18px;
+padding: 12px;
+width: 100%;
+border: none;
+border-radius: 10px;
+background: #d32f2f;
+color: #fff;
+font-size: 15px;
+font-weight: bold;
+}
+
+.redeem {
+bottom: 50%;
+left: 50%;
+transform: translate(-50%, 50%)
+border: 3px solid #ff9800;
+background: #fff3cd;
+display: none;
+}
+
+.redeem.pulse {
+animation: pulseRedeem 1.8s infinite;
+}
+
+@keyframes pulseRedeem {
+0% { box-shadow: 0 0 0 0 rgba(255,152,0,0.6); }
+70% { box-shadow: 0 0 0 16px rgba(255,152,0,0); }
+100% { box-shadow: 0 0 0 0 rgba(255,152,0,0); }
+}
+
+</style>
+</head>
+
+<body>
+
+<h2>Event Stations</h2>
+<p style="text-align:center">
+Complete all stations to redeem a prize
+</p>
+
+<div id="map">
+  <div class="station" id="OLED" onclick="openScanner()">
+    OLED
+    <span class="star" id="star-OLED">⭐</span>
+  </div>
+
+  <div class="station" id="ULTRA" onclick="openScanner()">
+    ULTRA
+    <span class="star" id="star-ULTRA">⭐</span>
+  </div>
+
+  <div class="station" id="QNED" onclick="openScanner()">
+    QNED
+    <span class="star" id="star-QNED">⭐</span>
+  </div>
+
+  <div class="station" id="MRGB" onclick="openScanner()">
+    MRGB
+    <span class="star" id="star-MRGB">⭐</span>
+  </div>
+
+  <div class="station redeem" id="REDEEM" onclick="openRedeemPass()">
+    🎁 Redeem your token here 🎁
+    <span class="star" id="star-MRGB">⭐</span>
+  </div>
+</div>
+
+<button id="showPassBtn" style="display:none;" onclick="showCompletedPass()"> 
+Show Completed Pass
+</button>
+
+<div id="completedPass" class="completed hidden">
+  <div class="pass-card">
+<button class="close-btn" onclick="hideCompletedPass()">X</button>
+    <h2>🎉 Pass Completed!</h2>
+    <p>All stations cleared</p>
+
+    <div class="timestamp" id="passTime"></div>
+
+    <p class="note">
+      Show this screen to staff to redeem<br>
+      <strong>1 claw machine token</strong><br>
+      Good Luck!
+    </p>
+    <button id="redeemBtn" class="redeem-btn">
+Redeem!
+</button>
+
+    <div class="pulse"></div>
+  </div>
+</div>
+
+<div id="redeemedOverlay" class="completed hidden">
+  <div class="pass-card">
+    <h2>❌ Pass Used</h2>
+    <p>Token has been redeemed.</p>
+
+    <div class="timestamp" id="redeemedTime"></div>
+
+    <p class="note">
+      
+    </p>
+  
+    <div class="pulse"></div>
+  </div>
+</div>
+
+
+<div id="scannerModal">
+  <div id="reader"></div>
+  <button id="closeBtn" onclick="closeScanner()">Cancel</button>
+</div>
+
+
+<script>
+window.addEventListener("load", () => {
+updateStars()
+document.getElementById("redeemBtn").addEventListener("click", onRedeem);
+
+// if (allStationsCompleted()) showCompletedPass()
+let p = loadProgress()
+if (p.redeemed) {
+showRedeemed()
+} else if (allstationsCompleted()) {
+// showCompletedPass()
+showRedemptionBooth()
+}
+})
+
+if (isDevMode()) {
+saveProgress({
+OLED: true,
+QNED: true,
+ULTRA: true,
+MRGB: true
+})
+}
+
+
+let scanner;
+
+function loadProgress() {
+  return JSON.parse(localStorage.getItem("eventProgress") || "{}");
+}
+
+function saveProgress(p) {
+  localStorage.setItem("eventProgress", JSON.stringify(p));
+}
+
+function updateStars() {
+  const p = loadProgress();
+  Object.keys(p).forEach(id => {
+    const star = document.getElementById("star-" + id);
+    if (star) star.style.display = "inline";
+  });
+}
+
+async function openScanner() {
+  document.getElementById("scannerModal").style.display = "block";
+
+  if (!scanner) {
+    scanner = new Html5Qrcode("reader");
+  }
+
+try {
+await scanner.start(
+    { facingMode: "environment" },
+    { fps: 6, qrbox: 260, disableFlip: true },
+    onScan
+  );
+} catch(err) {
+console.error("Camera start failed", err);
+}
+}
+
+function closeScanner() {
+  document.getElementById("scannerModal").style.display = "none";
+  scanner?.stop().catch(() => {});
+}
+
+function onScan(text) {
+  if (!text.startsWith("STATION:")) return;
+
+  const stationId = text.split(":")[1];
+  const p = loadProgress();
+  p[stationId] = true;
+  saveProgress(p);
+
+  updateStars();
+if (allStationsCompleted()) {
+// showCompletedPass() 
+showRedemptionBooth()
+}
+  closeScanner();
+}
+
+updateStars();
+
+
+let STATIONS = ["OLED", "QNED", "ULTRA", "MRGB"]
+function allStationsCompleted() {
+let p = loadProgress();
+return STATIONS.every(id => p[id] == true);
+}
+
+function showCompletedPass() {
+let pass = document.getElementById("completedPass")
+let timeEl = document.getElementById("passTime")
+
+pass.classList.remove("hidden")
+
+updateTime();
+setInterval(updateTime, 1000)
+
+function updateTime() {
+let now = new Date()
+timeEl.textContent = now.toLocaleString()
+}}
+
+
+function onRedeem() {
+let confirmRedeem = confirm("Confirm redemption?\nThe pass will become invalid.")
+if (!confirmRedeem) return
+
+// localStorage.removeItem("eventProgress")
+
+let p = loadProgress()
+p.redeemed = true
+p.redeemedAt = new Date().toLocaleString()
+saveProgress(p)
+
+document.getElementById("completedPass").classList.add("hidden")
+showRedeemed()
+}
+
+function showRedeemed() {
+let pass = document.getElementById("redeemedOverlay")
+let timeEl = document.getElementById("redeemedTime")
+
+pass.classList.remove("hidden")
+let p = loadProgress()
+if (p.redeemedAt) {
+timeEl.textContent = "Redeemed at: " + new Date(p.redeemedAt).toLocaleString() 
+}}
+
+function showRedemptionBooth() {
+let booth = document.getElementById("REDEEM") 
+booth.style.display = "flex"
+booth.classList.add("pulse")
+}
+
+function hideCompletedPass() {
+document.getElementById("completedPass").classList.add("hidden")
+}
+
+function openRedeemPass() {
+showCompletedPass()
+}
+
+function updateShowPassButton() {
+let p = loadProgress()
+document.getElementById("showPassBtn").style.display = 
+allStationsCompleted() && !p.redeemed ? "block" : "none";
+}
+
+function isDevMode() {
+return new
+URLSearchParams(window.location.search).get("dev") == "1";
+}
+
+</script>
+
+</body>
+</html>
