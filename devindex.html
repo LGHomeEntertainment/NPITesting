@@ -147,7 +147,7 @@ font-size: 15px;
 font-weight: bold;
 }
 
-.pulse {
+.pass-pulse {
 position: absolute;
 inset: -6px;
 border-radius: 20px;
@@ -163,9 +163,9 @@ pointer-events: none;
 }
   
 .redeem {
-  position: absolute;
-bottom: 50%;
-left: 50%;
+position: absolute;
+bottom: 60%;
+left: 70%;
 transform: translate(-50%, 50%);
 border: 3px solid #ff9800;
 background: #fff3cd;
@@ -239,7 +239,7 @@ Show Completed Pass
 Redeem!
 </button>
 
-    <div class="pulse"></div>
+    <div class="pass-pulse"></div>
   </div>
 </div>
 
@@ -426,7 +426,7 @@ timeEl.textContent = "Redeemed at: " + new Date(p.redeemedAt).toLocaleString()
 function showRedemptionBooth() {
 let booth = document.getElementById("REDEEM") 
 booth.style.display = "flex"
-booth.classList.add("pulse")
+booth.classList.add("redeem-pulse")
 }
 
 
