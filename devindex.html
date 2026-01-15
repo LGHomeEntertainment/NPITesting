@@ -135,8 +135,6 @@ margin-top: 16px;
 font-size: 14px;
 }
 
-
-
 .redeem-btn {
 margin-top: 18px;
 padding: 12px;
@@ -165,6 +163,7 @@ pointer-events: none;
 }
   
 .redeem {
+  position: absolute;
 bottom: 50%;
 left: 50%;
 transform: translate(-50%, 50%);
@@ -225,7 +224,7 @@ Show Completed Pass
 
 <div id="completedPass" class="completed hidden">
   <div class="pass-card">
-<button id="closeBtn" class="close-btn">X</button>
+<button id="closePassBtn" class="close-btn">X</button>
     <h2>🎉 Pass Completed!</h2>
     <p>All stations cleared</p>
 
@@ -262,7 +261,7 @@ Redeem!
 
 <div id="scannerModal">
   <div id="reader"></div>
-  <button id="closeBtn" onclick="closeScanner()">Cancel</button>
+  <button id="closeScannerBtn" onclick="closeScanner()">Cancel</button>
 </div>
 
 
@@ -271,12 +270,12 @@ let DEV_MODE = true;
 if (DEV_MODE) resetDevProgress() 
 let STATIONS = ["OLED", "QNED", "ULTRA", "MRGB"]
 let scanner;
-
+let timeInterval = null;
 
 window.addEventListener("load", () => {
 updateStars()
 document.getElementById("redeemBtn").addEventListener("click", onRedeem);
-document.getElementById("closeBtn").addEventListener("click", hideCompletedPass);
+document.getElementById("closePassBtn").addEventListener("click", hideCompletedPass);
 
 let p = loadProgress()
 if (p.redeemed) {
@@ -386,15 +385,16 @@ let timeEl = document.getElementById("passTime")
 pass.classList.remove("hidden")
 
 updateTime();
-setInterval(updateTime, 1000)
+clearInterval(timeInterval);
+timeInterval = setInterval(updateTime, 1000)
 
 function updateTime() {
-let now = new Date()
-timeEl.textContent = now.toLocaleString()
+timeEl.textContent = new Date().toLocaleString()
 }}
 
 function hideCompletedPass() {
 document.getElementById("completedPass").classList.add("hidden")
+  clearInterval(timeInterval);
 }
 
 
