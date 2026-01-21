@@ -283,7 +283,6 @@ const STATION_MAP = {
 
 window.addEventListener("load", () => {
 updateStars()
-document.getElementById("redeemBtn").addEventListener("click", onRedeem);
 document.getElementById("closePassBtn").addEventListener("click", hideCompletedPass);
 
 let p = loadProgress()
@@ -431,21 +430,6 @@ let p = loadProgress()
 function hideCompletedPass() {
 document.getElementById("completedPass").classList.add("hidden")
   clearInterval(timeInterval);
-}
-
-function onRedeem() {
-let confirmRedeem = confirm("Confirm redemption?\nThe pass will become invalid.")
-if (!confirmRedeem) return
-
-// localStorage.removeItem("eventProgress")
-
-let p = loadProgress()
-p.redeemed = true
-p.redeemedAt = Date.now()
-saveProgress(p)
-
-document.getElementById("completedPass").classList.add("hidden")
-showRedeemed()
 }
 
 function showRedeemed() {
