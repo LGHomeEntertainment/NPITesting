@@ -454,7 +454,7 @@ let timeEl = document.getElementById("redeemedTime")
 pass.classList.remove("hidden")
 let p = loadProgress()
 if (p.redeemedAt) {
-timeEl.textContent = "Redeemed at: " + new Date(p.redeemedAt).toLocaleString() 
+timeEl.textContent = "Redeemed at: " + p.redeemedAt
 }}
 
 function showRedemptionBooth() {
