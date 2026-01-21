@@ -198,9 +198,9 @@ Complete all stations to redeem a prize
     <span class="star" id="star-OLED">⭐</span>
   </div>
 
-  <div class="station" id="ULTRA" onclick="openScanner()">
-    ULTRA
-    <span class="star" id="star-ULTRA">⭐</span>
+  <div class="station" id="ULTRA LARGE" onclick="openScanner()">
+    ULTRA LARGE
+    <span class="star" id="star-ULTRA LARGE">⭐</span>
   </div>
 
   <div class="station" id="QNED" onclick="openScanner()">
@@ -266,9 +266,9 @@ Scan QR code to exchange for your scratch card
 
 
 <script>
-let DEV_MODE = false;
+let DEV_MODE = true;
 if (DEV_MODE) resetDevProgress() 
-let STATIONS = ["OLED", "QNED", "ULTRA", "MRGB"]
+let STATIONS = ["OLED", "QNED", "ULTRA LARGE", "MRGB"]
 let scanner;
 let timeInterval = null;
 
@@ -303,7 +303,7 @@ function resetDevProgress() {
 let clean = {
 OLED: true,
 QNED: true,
-ULTRA: true,
+ULTRA LARGE: true,
 MRGB: false,
 redeemed: false
 }
@@ -339,6 +339,7 @@ function closeScanner() {
 }
 
 function onScan(text) {
+text = text.trim()
 // STATION QR
   if (text.startsWith("S:")) {
 let key = text.substring(2)
