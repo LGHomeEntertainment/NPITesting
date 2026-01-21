@@ -214,7 +214,7 @@ Complete all stations to redeem a prize
   </div>
 
   <div class="station redeem" id="REDEEM" onclick="openRedeemPass()">
-    🎁 Redeem your token here 🎁
+    🎁 Redeem your prize here 🎁
   </div>
 </div>
 
@@ -232,11 +232,11 @@ Show Completed Pass
 
     <p class="note">
       Show this screen to staff to redeem<br>
-      <strong>1 claw machine token</strong><br>
+      <strong>1 scratch card</strong><br>
       Good Luck!
     </p>
-    <button id="redeemBtn" class="redeem-btn">
-Redeem!
+    <button id="redeemBtn" class="redeem-btn" onclick="openScanner()">
+Scan QR code to exchange for your scratch card
 </button>
 
     <div class="pass-pulse"></div>
@@ -305,8 +305,6 @@ console.log("DEV_MODE: progress reset", clean)
 
 
 
-
-
 // CAMERA
 async function openScanner() {
   document.getElementById("scannerModal").style.display = "block";
@@ -350,7 +348,6 @@ showRedemptionBooth()
 updateStars();
 
 
-
 // CHECK STATUS
 function loadProgress() {
   return JSON.parse(localStorage.getItem("eventProgress") || "{}");
@@ -376,7 +373,6 @@ return STATIONS.every(id => p[id] == true);
 }
 
 
-
 // COMPLETED PASS/REDEEM PASS
 function showCompletedPass() {
 let pass = document.getElementById("completedPass")
@@ -396,7 +392,6 @@ function hideCompletedPass() {
 document.getElementById("completedPass").classList.add("hidden")
   clearInterval(timeInterval);
 }
-
 
 function onRedeem() {
 let confirmRedeem = confirm("Confirm redemption?\nThe pass will become invalid.")
@@ -428,8 +423,6 @@ let booth = document.getElementById("REDEEM")
 booth.style.display = "flex"
 booth.classList.add("redeem-pulse")
 }
-
-
 
 function openRedeemPass() {
 showCompletedPass()
