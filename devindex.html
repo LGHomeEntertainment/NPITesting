@@ -225,14 +225,14 @@ Show Completed Pass
 <div id="completedPass" class="completed hidden">
   <div class="pass-card">
 <button id="closePassBtn" class="close-btn">X</button>
-    <h2>🎉 Pass Completed!</h2>
-    <p>All stations cleared</p>
+    <h2>🎉 All Stations Completed!</h2>
+    <p></p>
 
     <div class="timestamp" id="passTime"></div>
 
     <p class="note">
-      Show this screen to staff to redeem<br>
-      <strong>1 scratch card</strong><br>
+Head to the redemption booth to redeem<br>
+    <strong>1 scratch card</strong><br>
       Good Luck!
     </p>
     <button id="redeemBtn" class="redeem-btn" onclick="openScanner()">
@@ -245,8 +245,8 @@ Scan QR code to exchange for your scratch card
 
 <div id="redeemedOverlay" class="completed hidden">
   <div class="pass-card">
-    <h2>❌ Pass Used</h2>
-    <p>Token has been redeemed.</p>
+    <h2>Thank you for participating!</h2> <!-- ❌ Pass Used -->
+    <p>Card has been redeemed.</p>
 
     <div class="timestamp" id="redeemedTime"></div>
 
@@ -266,7 +266,7 @@ Scan QR code to exchange for your scratch card
 
 
 <script>
-let DEV_MODE = true;
+let DEV_MODE = false;
 if (DEV_MODE) resetDevProgress() 
 let STATIONS = ["OLED", "QNED", "ULTRA", "MRGB"]
 let scanner;
@@ -278,7 +278,7 @@ const STATION_MAP = {
 "SRC7LsY7": "ULTRA LARGE",
 "10k7CBA9": "MRGB"
 }
-// R: N0Uf9B3D for redemption
+// R:N0Uf9B3D for redemption
 
 
 window.addEventListener("load", () => {
