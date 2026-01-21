@@ -61,7 +61,7 @@ h2 {
 
 /* Station positions (ROUGH, adjustable later) */
 #OLED { top: 20px; left: 20px; }
-#GALLERY TV { top: 20px; right: 20px; }
+#GALLERY { top: 20px; right: 20px; }
 #QNED { bottom: 20px; left: 20px; }
 #MRGB { bottom: 20px; right: 20px; }
 
@@ -198,9 +198,9 @@ Complete all stations to redeem a prize
     <span class="star" id="star-OLED">⭐</span>
   </div>
 
-  <div class="station" id="GALLERY TV" onclick="openScanner()">
-    GALLERY TV
-    <span class="star" id="star-GALLERY TV">⭐</span>
+  <div class="station" id="GALLERY" onclick="openScanner()">
+    GALLERY
+    <span class="star" id="star-GALLERY">⭐</span>
   </div>
 
   <div class="station" id="QNED" onclick="openScanner()">
@@ -268,14 +268,14 @@ Scan QR code to exchange for your scratch card
 <script>
 let DEV_MODE = true;
 if (DEV_MODE) resetDevProgress() 
-let STATIONS = ["OLED", "QNED", "GALLERY TV", "MRGB"]
+let STATIONS = ["OLED", "QNED", "GALLERY", "MRGB"]
 let scanner;
 let timeInterval = null;
 
 const STATION_MAP = {
 "qJZ1eCxQ": "OLED",
 "sve4h4LW": "QNED",
-"SRC7LsY7": "GALLERY TV",
+"SRC7LsY7": "GALLERY",
 "10k7CBA9": "MRGB"
 }
 // R:N0Uf9B3D for redemption
@@ -303,7 +303,7 @@ function resetDevProgress() {
 let clean = {
 OLED: true,
 QNED: true,
-GALLERY TV: true,
+GALLERY: true,
 MRGB: false,
 redeemed: false
 }
