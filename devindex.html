@@ -353,7 +353,7 @@ if (!stationId) return
   updateStars();
 
 if (allStationsCompleted()) {
-  let p = loadProgess()
+  let p = loadProgress()
   if (!p.completedAt) {
     p.completedAt = new Date().toLocaleString()
     saveProgress(p)
@@ -421,7 +421,7 @@ pass.classList.remove("hidden")
 
 let p = loadProgress()
  if (p.completedAt) {
-    tiemEl.textContent = "Completed at: " + p.completedAt
+    timeEl.textContent = "Completed at: " + p.completedAt
  } else {
    timeEl.textContent = ""
   }
