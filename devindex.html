@@ -440,7 +440,7 @@ if (!confirmRedeem) return
 
 let p = loadProgress()
 p.redeemed = true
-p.redeemedAt = new Date().toLocaleString()
+p.redeemedAt = Date.now()
 saveProgress(p)
 
 document.getElementById("completedPass").classList.add("hidden")
@@ -454,7 +454,7 @@ let timeEl = document.getElementById("redeemedTime")
 pass.classList.remove("hidden")
 let p = loadProgress()
 if (p.redeemedAt) {
-timeEl.textContent = "Redeemed at: " + p.redeemedAt
+timeEl.textContent = "Redeemed at: " + new Date(p.redeemedAt).toLocaleString()
 }}
 
 function showRedemptionBooth() {
