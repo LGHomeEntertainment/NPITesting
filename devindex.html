@@ -272,6 +272,15 @@ let STATIONS = ["OLED", "QNED", "ULTRA", "MRGB"]
 let scanner;
 let timeInterval = null;
 
+const STATION_MAP = {
+"qJZ1eCxQ": "OLED",
+"sve4h4LW": "QNED",
+"SRC7LsY7": "ULTRA LARGE",
+"10k7CBA9": "MRGB"
+}
+// R: N0Uf9B3D for redemption
+
+
 window.addEventListener("load", () => {
 updateStars()
 document.getElementById("redeemBtn").addEventListener("click", onRedeem);
@@ -330,20 +339,44 @@ function closeScanner() {
 }
 
 function onScan(text) {
-  if (!text.startsWith("STATION:")) return;
+// STATION QR
+  if (text.startsWith("S:")) {
+let key = text.substring(2)
+  const stationId = STATION_MAP[key]
 
-  const stationId = text.split(":")[1];
+if (!stationId) return
+
   const p = loadProgress();
   p[stationId] = true;
   saveProgress(p);
 
   updateStars();
+
 if (allStationsCompleted()) {
-// showCompletedPass() 
 showRedemptionBooth()
 }
-  closeScanner();
+
+  closeScanner(); 
+return
 }
+// REDEEM QR
+if (text == "R: N0Uf9B3D") {
+let p = loadProgress()
+
+if (!allStationsCompleted()) { 
+alert("Pass incomplete. Please finish all stations.")
+return
+}
+if (p.redeemed) return
+p.redeemed = true
+p.redeemedAt = new Date().toLocaleString()
+saveProgress(p)
+showRedeemed()
+closeScanner()
+return 
+}}
+
+
 
 updateStars();
 
