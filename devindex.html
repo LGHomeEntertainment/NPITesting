@@ -353,14 +353,21 @@ if (!stationId) return
   updateStars();
 
 if (allStationsCompleted()) {
+  let p = loadProgess()
+  if (!p.completedAt) {
+    p.completedAt = new Date().toLocaleString()
+    saveProgress(p)
+  }
 showRedemptionBooth()
 }
 
   closeScanner(); 
 return
 }
+  
 // REDEEM QR
-if (text == "R: N0Uf9B3D") {
+if (text == "R:N0Uf9B3D") {
+  closeScanner()
 let p = loadProgress()
 
 if (!allStationsCompleted()) { 
@@ -372,7 +379,6 @@ p.redeemed = true
 p.redeemedAt = new Date().toLocaleString()
 saveProgress(p)
 showRedeemed()
-closeScanner()
 return 
 }}
 
@@ -413,13 +419,13 @@ let timeEl = document.getElementById("passTime")
 
 pass.classList.remove("hidden")
 
-updateTime();
-clearInterval(timeInterval);
-timeInterval = setInterval(updateTime, 1000)
-
-function updateTime() {
-timeEl.textContent = new Date().toLocaleString()
-}}
+let p = loadProgress()
+ if (p.completedAt) {
+    tiemEl.textContent = "Completed at: " + p.completedAt
+ } else {
+   timeEl.textContent = ""
+  }
+}
 
 function hideCompletedPass() {
 document.getElementById("completedPass").classList.add("hidden")
