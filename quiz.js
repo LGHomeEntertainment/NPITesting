@@ -1101,9 +1101,6 @@ function updateProgressBar(complete = false) {
 // ── NAV BAR ───────────────────────────────────────────────────
 function updateNav(q) {
   el("top-nav").style.display = "";
-  el("nav-phase").textContent = q.phase;
-  el("nav-phase").style.color = q.phaseColor;
-  el("nav-phase").style.borderColor = q.phaseColor;
 
   const step = currentStepNum();
   const total = state.isSbm ? 2 : QUESTION_ORDER.length;
@@ -1162,7 +1159,7 @@ function doRestart() {
   resetIdleTimer();
   track("restart", { from: state.currentQ });
   resetState();
-  el("top-nav").style.display = "";
+  el("top-nav").style.display = "none";
   el("progress-bar").style.width = "0%";
   showScreen("screen-landing");
 }
@@ -1175,7 +1172,7 @@ function init() {
     resetIdleTimer();
     track("nav_home", { from: state.currentQ });
     resetState();
-    el("top-nav").style.display = "";
+    el("top-nav").style.display = "none";
     el("progress-bar").style.width = "0%";
     showScreen("screen-landing");
   });
