@@ -146,9 +146,7 @@ const QUESTIONS = [
     phase: "Usage",
     phaseColor: "var(--phase-usage)",
     text: "How do you mainly use your TV?",
-    hint: "Pick up to 2",
-    multi: true,
-    maxSelect: 2,
+    multi: false,
     answers: [
       {
         id: "q4-movies",
@@ -825,7 +823,7 @@ function renderQuestion(qId) {
     callout.style.borderColor = "var(--phase-mobility)";
     callout.style.color = "var(--phase-mobility)";
     callout.style.background = "#F5F0FF";
-    callout.textContent = "LG StanbyME 2026 — 32\" 4K UHD · Wireless · Tilts and rolls wherever you go";
+   // callout.textContent = "LG StanbyME 2026 — 32\" 4K UHD · Wireless · Tilts and rolls wherever you go";
     container.appendChild(callout);
   }
 
