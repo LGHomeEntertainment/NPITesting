@@ -151,7 +151,7 @@ const QUESTIONS = [
       {
         id: "q4-movies",
         icon: "🎬",
-        label: "Cinematic movies & streaming",
+        label: "Movies & Dramas",
         sub: "You love rich colours and deep contrast",
         scores: { oled: 3, mrgb: 1, qned: 0, nu: 0 },
         flags: ["copy-hyper-radiant"],
@@ -159,7 +159,7 @@ const QUESTIONS = [
       {
         id: "q4-sports",
         icon: "⚽",
-        label: "Sports and live broadcasts",
+        label: "Sports and Live TV",
         sub: "Fast motion, bright stadium action",
         scores: { oled: -1, mrgb: 3, qned: 2, nu: 0 },
         flags: ["copy-motion"],
@@ -167,23 +167,15 @@ const QUESTIONS = [
       {
         id: "q4-gaming",
         icon: "🎮",
-        label: "Console or PC gaming",
+        label: "Gaming",
         sub: "Low latency and high refresh rate matter",
         scores: { oled: 3, mrgb: 2, qned: 0, nu: 0 },
         flags: ["copy-gaming"],
       },
       {
-        id: "q4-family",
-        icon: "👨‍👩‍👧",
-        label: "Family viewing — kids included",
-        sub: "LG OLED is certified eye safe for the whole family",
-        scores: { oled: 1, mrgb: 0, qned: 2, nu: 2 },
-        flags: ["copy-eye-safe"],
-      },
-      {
         id: "q4-general",
         icon: "📺",
-        label: "General everyday use",
+        label: "A Bit of Everything",
         sub: "A reliable screen for a bit of everything",
         scores: { oled: 0, mrgb: 0, qned: 2, nu: 2 },
       },
@@ -333,7 +325,6 @@ const QUESTIONS = [
     phase: "Budget",
     phaseColor: "var(--phase-mobility)",
     text: "One last thing — what's your budget for the StanbyME?",
-    hint: "LG StanbyME 2026 — 32\" 4K UHD · Wireless · Tilts and rolls wherever you go",
     multi: false,
     isSbmPath: true,
     answers: [
