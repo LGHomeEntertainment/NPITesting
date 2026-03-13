@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Find Your Perfect Screen — LG TV Quiz</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div id="app">
+
+    <!-- ── PROGRESS BAR ──────────────────────────────────── -->
+    <div id="progress-bar-wrap">
+      <div id="progress-bar"></div>
+    </div>
+
+    <!-- ── TOP NAV ───────────────────────────────────────── -->
+    <nav id="top-nav">
+      <div id="nav-left">
+        <span id="nav-phase" class="phase-pill">Mobility</span>
+      </div>
+      <span id="nav-brand">Find Your Perfect Screen</span>
+      <div id="nav-right">
+        <span id="step-counter">1 of 8</span>
+        <button id="nav-back"  class="nav-btn">← Back</button>
+        <button id="nav-home"  class="nav-btn">Home</button>
+      </div>
+    </nav>
+
+    <!-- ── LANDING SCREEN ────────────────────────────────── -->
+    <section id="screen-landing" class="screen">
+      <div class="landing-title">Beyond Boundaries</div>
+      <div class="landing-subtitle">Find Your Perfect Screen</div>
+      <p class="landing-desc">
+        Answer a few quick questions and we'll match you with the LG TV that's made for you.
+      </p>
+      <button id="btn-start" class="btn-start">Start Quiz &nbsp;→</button>
+      <div class="landing-steps">
+        <div class="step-chip"><span class="step-chip-num">1</span> Mobility</div>
+        <div class="step-chip"><span class="step-chip-num">2</span> Room</div>
+        <div class="step-chip"><span class="step-chip-num">3</span> Usage</div>
+        <div class="step-chip"><span class="step-chip-num">4</span> Environment</div>
+        <div class="step-chip"><span class="step-chip-num">5</span> Budget</div>
+        <div class="step-chip"><span class="step-chip-num">6</span> Result</div>
+      </div>
+    </section>
+
+    <!-- ── QUESTION SCREEN ───────────────────────────────── -->
+    <section id="screen-question" class="screen hidden">
+      <div id="question-container"></div>
+    </section>
+
+    <!-- ── RESULT SCREEN ─────────────────────────────────── -->
+    <section id="screen-result" class="screen hidden">
+      <div id="result-container"></div>
+    </section>
+
+  </div><!-- #app -->
+
+  <!-- ── IDLE OVERLAY ──────────────────────────────────────── -->
+  <div id="idle-overlay">
+    <div class="idle-box">
+      <h3>Still there?</h3>
+      <p>Restarting in</p>
+      <div class="idle-countdown" id="idle-count">10</div>
+      <div class="idle-btn-row">
+        <button class="idle-btn-continue" id="idle-btn-continue">Keep going</button>
+        <button class="idle-btn-restart"  id="idle-btn-restart">Start over</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="quiz.js"></script>
+</body>
+</html>
