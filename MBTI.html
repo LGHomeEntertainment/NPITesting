@@ -704,4 +704,310 @@ const QUESTIONS = [
 ];
 
 const SCALE_LABELS = [
-  { val: 5, word: 'Stro
+  { val: 5, word: 'Strongly\nAgree' },
+  { val: 4, word: 'Agree' },
+  { val: 3, word: 'Neutral' },
+  { val: 2, word: 'Disagree' },
+  { val: 1, word: 'Strongly\nDisagree' }
+];
+
+const TV_DATA = {
+  W6:        { name: 'OLED W6',    tagline: 'The ultimate wallpaper OLED. Impossibly thin, impossibly beautiful — with a Zero Connect Box that hides every wire.', features: ['Wallpaper Design', 'OLED evo 4K', 'Zero Connect Box', 'Dolby Vision', 'FILMMAKER MODE'] },
+  G6:        { name: 'OLED G6',    tagline: 'Gallery-class OLED that mounts flush to the wall. Premium picture meets refined design.', features: ['Flush Wall Mount', 'OLED evo 4K', 'Brightness Booster Ultra', 'Dolby Vision', 'G-SYNC / FreeSync'] },
+  C6:        { name: 'OLED C6',    tagline: 'Slim, stunning, and seriously capable. The OLED that does it all without compromise.', features: ['OLED evo 4K', 'Dolby Vision', 'FILMMAKER MODE', 'VRR 165Hz', 'G-SYNC / FreeSync'] },
+  B6:        { name: 'OLED B6',    tagline: 'Your entry into OLED. Perfect blacks, vivid colour, at a price that makes sense.', features: ['OLED 4K', 'Dolby Vision', 'FILMMAKER MODE', 'VRR 144Hz', 'FreeSync Premium'] },
+  MRGB96:    { name: 'MRGB96',     tagline: 'MicroRGB at 100" — colour reproduction so rich it has to be seen to be believed.', features: ['100" MicroRGB evo 4K', 'Triple 100% Colour Coverage', 'Micro Dimming Ultra', 'Dolby Vision'] },
+  MRGB86:    { name: 'MRGB86',     tagline: 'MiniRGB technology brings richer, more vibrant colour to a mid-range price point.', features: ['MiniRGB evo 4K', 'Double 100% Colour Coverage', 'Precision Dimming', 'FreeSync Premium'] },
+  QNED86:    { name: 'QNED86',     tagline: 'Fast, sharp, and versatile. The QNED that handles everything from movies to gaming.', features: ['QNED MiniLED 4K', '120Hz', 'Dolby Vision', 'FreeSync Premium 144Hz', 'Precision Dimming'] },
+  QNED80:    { name: 'QNED80',     tagline: 'A solid everyday performer that looks great without asking too much of your wallet.', features: ['QNED MiniLED 4K', 'FILMMAKER MODE', 'VRR up to 60Hz', 'ALLM'] },
+  Gallery:   { name: 'Gallery TV', tagline: 'When the TV is off, it becomes art. A curated QNED with an always-on display that blends into your home.', features: ['55" / 65" QNED', 'Always-On Art Display', 'Ultra Slim Frame', 'Gallery Mode', 'FILMMAKER MODE'] },
+  NU85:      { name: 'NU85',       tagline: 'The everyday essential. Clean picture, smart features, and room for the whole family.', features: ['NanoUHD 4K', 'AI Sound Pro', 'FILMMAKER MODE', 'VRR up to 60Hz'] },
+  SBM2:      { name: '32" SBM2',   tagline: "You're not indecisive — you're versatile. Here's a screen that keeps up with everything you do.", features: ['32" 4K UHD', 'Dolby Vision', 'Game Optimizer', 'Compact & Flexible'] }
+};
+
+const ARCHETYPES = {
+  DCLS: { name: 'The Gallery Cinephile',      desc: "You want your TV to be a work of art — and the films you watch to feel like a theatre. You appreciate the finer things and won't compromise on either beauty or experience.", primary: 'W6', dream: null, backup: 'G6', upsell: false },
+  DCLU: { name: 'The Sleek Purist',           desc: "Design matters deeply to you — but you know where to draw the line on spending. You want something that looks stunning without the flagship price tag.", primary: 'G6', dream: 'W6', backup: null, upsell: false },
+  DCRS: { name: 'The Tasteful Film Lover',    desc: "You care how the TV looks in the room and you love a good film — but you're smart with money. You want style and cinema without the top-tier spend.", primary: 'MRGB86', dream: 'G6', backup: null, upsell: false },
+  DCRU: { name: 'The Casual Cinephile',       desc: "Films are your thing, and you like a TV that looks decent. But you're not losing sleep over specs — a good-looking screen that handles movies well is all you need.", primary: 'MRGB86', dream: null, backup: 'QNED86', upsell: false },
+  DGLS: { name: 'The Designer Gamer',         desc: "Your setup has to look as good as it performs. You game hard and you spend smart — but the aesthetic of the whole rig matters just as much as the framerates.", primary: 'G6', dream: 'W6', backup: 'MRGB96', upsell: false },
+  DGLU: { name: 'The Clean Setup Gamer',      desc: "You game seriously and you care about the look of your space — but you're not paying extra just for a thinner bezel. Performance per dollar, with a clean finish.", primary: 'C6', dream: null, backup: null, upsell: false },
+  DGRS: { name: 'The Style-Conscious Gamer',  desc: "Mid-budget gamer who wants the rig to look sharp. You'll pick up the MRGB for the colour punch and the clean design without breaking the bank.", primary: 'MRGB86', dream: null, backup: 'QNED86', upsell: false },
+  DGRU: { name: 'The Practical Setup Gamer',  desc: "Gaming is the priority. The TV needs to perform — FreeSync, fast response, sharp picture. Everything else is secondary, including the price tag.", primary: 'QNED86', dream: null, backup: null, upsell: false },
+  DELS: { name: 'The Quiet Curator',          desc: "Your home is thoughtfully put together, and the TV is part of that story — even when it's off. You want something that shows art, blends in, and doesn't scream 'tech' at a dinner party.", primary: 'Gallery', dream: null, backup: 'G6', upsell: false },
+  DELU: { name: 'The Modern Homebody',        desc: "Everyday viewer with an eye for design. You're not a cinephile or a gamer — the TV just needs to look good and work well for everything life throws at it.", primary: 'MRGB86', dream: null, backup: null, upsell: true },
+  DERS: { name: 'The Relaxed Decorator',      desc: "Design-conscious but budget-aware. You want the TV to feel like it belongs in the room, without overspending. A solid everyday screen that won't stand out for the wrong reasons.", primary: 'QNED80', dream: null, backup: 'NU85', upsell: true },
+  DERU: { name: 'The Easy Viewer',            desc: "You just need a reliable TV that does the job. No fuss, no drama — just good picture, everyday use, and a price that makes sense.", primary: 'NU85', dream: null, backup: null, upsell: true },
+  PCLS: { name: 'The Cinephile',              desc: "Absolute picture perfection, cinema-grade colour, the best OLED you can get — and it should make a statement while it's at it. You are the target audience for the W6.", primary: 'W6', dream: null, backup: 'G6', upsell: false },
+  PCLU: { name: 'The Picture Purist',         desc: "Best-in-class OLED picture quality is non-negotiable. You'll invest in the best — but you care about what's on screen, not what the TV looks like when it's off.", primary: 'C6', dream: 'G6', backup: null, upsell: false },
+  PCRS: { name: 'The Film Enthusiast',        desc: "Picture-first, cinema-loving, mid-budget. You want the OLED experience without going all the way to the top. The C6 gives you that — and then some.", primary: 'C6', dream: null, backup: null, upsell: false },
+  PCRU: { name: 'The Movie Night Regular',    desc: "You love a good movie and you want the picture to do it justice — but you're practical about spend. Entry OLED or MiniRGB gets you most of the way there for less.", primary: 'B6', dream: null, backup: 'MRGB86', upsell: false },
+  PGLS: { name: 'The Hardcore Gamer',         desc: "No lag. No compromise. You want the best OLED gaming experience and you're proud of what the setup looks like. G6 gives you elite performance and a setup worth showing off.", primary: 'G6', dream: null, backup: 'C6', upsell: false },
+  PGLU: { name: 'The Competitive Gamer',      desc: "Raw gaming performance is everything. You'll spend on the best — but you're not paying for aesthetics. The C6 gives you OLED speed without the premium on looks.", primary: 'C6', dream: null, backup: null, upsell: false },
+  PGRS: { name: 'The Passionate Gamer',       desc: "Serious about gaming but realistic about budget. You want FreeSync, fast response, and good colour — without needing the flagship. QNED86 delivers on all three.", primary: 'QNED86', dream: null, backup: 'MRGB86', upsell: false },
+  PGRU: { name: 'The Practical Gamer',        desc: "Gaming performance per dollar is your metric. FreeSync, 120Hz, solid picture — the QNED86 is built for you without asking you to spend more than you need to.", primary: 'QNED86', dream: null, backup: null, upsell: false },
+  PELS: { name: 'The Premium Binge Watcher',  desc: "Everyday viewing elevated. You want the TV to look amazing, display art when it's off, and deliver premium picture for everything you watch. Gallery TV was made for this.", primary: 'Gallery', dream: null, backup: 'MRGB96', upsell: false },
+  PELU: { name: 'The Living Room Hero',       desc: "Best possible picture for everyday use, and you'll invest to get it. You don't care about the design statement — you care that every show, every sport, every stream looks brilliant.", primary: 'MRGB96', dream: null, backup: 'C6', upsell: false },
+  PERS: { name: 'The Smart Streamer',         desc: "You want the best picture you can get without overpaying. Sharp, fast, and Dolby Vision-ready — the QNED86 hits that spot perfectly.", primary: 'QNED86', dream: null, backup: null, upsell: true },
+  PERU: { name: 'The Casual Viewer',          desc: "You just want a great picture at a fair price. No drama, no fuss — a solid everyday screen that makes everything look better than it has any right to at this price.", primary: 'NU85', dream: null, backup: 'QNED80', upsell: true },
+  SBM2: { name: 'The Wildcard',               desc: "You're not indecisive — you're versatile. You use your TV for a bit of everything and you're not locked into one way of watching. The SBM2 keeps up with all of it.", primary: 'SBM2', dream: null, backup: null, upsell: false }
+};
+
+const BREAKDOWN_LABELS = {
+  D: { axis: 'Appearance', label: 'Design-first', icon: '🖼️' },
+  P: { axis: 'Appearance', label: 'Picture-first', icon: '✨' },
+  C: { axis: 'Usage', label: 'Cinema lover', icon: '🎬' },
+  G: { axis: 'Usage', label: 'Gamer', icon: '🎮' },
+  E: { axis: 'Usage', label: 'Everyday viewer', icon: '📺' },
+  L: { axis: 'Budget', label: 'Luxury mindset', icon: '💎' },
+  R: { axis: 'Budget', label: 'Realistic spender', icon: '💡' },
+  S: { axis: 'Décor', label: 'Statement piece', icon: '🏛️' },
+  U: { axis: 'Décor', label: 'Utility mindset', icon: '⚡' }
+};
+
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+let currentQ = 0;
+let answers = {};
+
+// ─────────────────────────────────────────────
+// QUIZ FLOW
+// ─────────────────────────────────────────────
+function startQuiz() {
+  currentQ = 0;
+  answers = {};
+  showScreen('screen-quiz');
+  document.getElementById('progressWrap').style.display = 'block';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[currentQ];
+  updateProgress();
+
+  const container = document.getElementById('questionContainer');
+  const axisInfo = AXIS_INFO[q.axis];
+
+  let html = `
+    <div class="axis-section">
+      <div class="axis-label">
+        <span class="axis-dot"></span>
+        ${axisInfo.icon} ${axisInfo.label}
+        <span class="question-num">Q${q.id} / 12</span>
+      </div>
+      <div class="question-text">${q.text}</div>
+  `;
+
+  html += `<div class="scale-wrap">
+    <div class="scale-labels">
+      <span>${q.agree}</span>
+      <span>${q.disagree}</span>
+    </div>
+    <div class="scale-options">`;
+
+  SCALE_LABELS.forEach(s => {
+    const sel = answers[q.id] === s.val ? `selected-${s.val}` : '';
+    const wordFormatted = s.word.replace('\n', '<br>');
+    html += `<button class="scale-btn ${sel}" data-val="${s.val}" onclick="selectScale(${s.val})">
+      <span class="scale-num">${s.val}</span>
+      <span class="scale-word">${wordFormatted}</span>
+    </button>`;
+  });
+
+  html += `</div></div></div>`;
+  container.innerHTML = html;
+
+  // Back button
+  document.getElementById('btnBack').style.display = currentQ === 0 ? 'none' : 'flex';
+  updateNextBtn();
+}
+
+function selectScale(val) {
+  const q = QUESTIONS[currentQ];
+  answers[q.id] = val;
+  renderQuestion();
+}
+
+function updateNextBtn() {
+  const q = QUESTIONS[currentQ];
+  const answered = answers[q.id] !== undefined;
+  const btn = document.getElementById('btnNext');
+  btn.classList.toggle('enabled', answered);
+  btn.textContent = currentQ === QUESTIONS.length - 1 ? 'See My Result →' : 'Next →';
+}
+
+function goNext() {
+  if (answers[QUESTIONS[currentQ].id] === undefined) return;
+  if (currentQ < QUESTIONS.length - 1) {
+    currentQ++;
+    renderQuestion();
+    window.scrollTo(0, 0);
+  } else {
+    showResult();
+  }
+}
+
+function goBack() {
+  if (currentQ > 0) {
+    currentQ--;
+    renderQuestion();
+    window.scrollTo(0, 0);
+  }
+}
+
+function updateProgress() {
+  const pct = Math.round((currentQ / QUESTIONS.length) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = `Question ${currentQ + 1} of ${QUESTIONS.length}`;
+  document.getElementById('progressPct').textContent = pct + '%';
+}
+
+// ─────────────────────────────────────────────
+// SCORING
+// ─────────────────────────────────────────────
+function calcResult() {
+  // Axis 1 — Appearance (D/P)
+  // Q1→P, Q2→D(flip), Q3→P
+  const q1 = answers[1]; // toward P
+  const q2 = 6 - answers[2]; // flip: toward P
+  const q3 = answers[3]; // toward P
+  const appearanceScore = q1 + q2 + q3; // ≥9 → P, <9 → D
+  const appearLetter = appearanceScore >= 9 ? 'P' : 'D';
+
+  // Axis 2 — Usage (C/G/E)
+  const cScore = answers[4];
+  const gScore = answers[5];
+  const eScore = answers[6];
+  let usageLetter;
+  const allNeutral = cScore === 3 && gScore === 3 && eScore === 3;
+  const sorted = [
+    { l: 'C', s: cScore },
+    { l: 'G', s: gScore },
+    { l: 'E', s: eScore }
+  ].sort((a, b) => b.s - a.s);
+  const gap = sorted[0].s - sorted[1].s;
+  if (allNeutral || gap <= 1) {
+    usageLetter = 'E'; // muddy → everyday
+  } else {
+    usageLetter = sorted[0].l;
+  }
+
+  // Axis 3 — Budget (L/R)
+  // Q7→L, Q8→R(flip toward L = 6-Q8), Q9→R(flip = 6-Q9)
+  const q7 = answers[7];
+  const q8 = 6 - answers[8]; // flip toward L
+  const q9 = 6 - answers[9]; // flip toward L
+  const budgetScore = q7 + q8 + q9; // ≥9 → L, <9 → R
+  const budgetLetter = budgetScore >= 9 ? 'L' : 'R';
+
+  // Axis 4 — Decor (S/U)
+  // Q10→S, Q11→U(flip toward S = 6-Q11), Q12→S
+  const q10 = answers[10];
+  const q11 = 6 - answers[11]; // flip toward S
+  const q12 = answers[12];
+  const decorScore = q10 + q11 + q12; // ≥9 → S, <9 → U
+  const decorLetter = decorScore >= 9 ? 'S' : 'U';
+
+  // SBM2 check — all 4 axes exactly at midpoint
+  const aExact = appearanceScore === 9;
+  const bExact = budgetScore === 9;
+  const dExact = decorScore === 9;
+  if (aExact && allNeutral && bExact && dExact) {
+    return 'SBM2';
+  }
+
+  return appearLetter + usageLetter + budgetLetter + decorLetter;
+}
+
+// ─────────────────────────────────────────────
+// RESULT
+// ─────────────────────────────────────────────
+function showResult() {
+  const code = calcResult();
+  const archetype = ARCHETYPES[code] || ARCHETYPES['SBM2'];
+  const tv = TV_DATA[archetype.primary];
+
+  // Header
+  document.getElementById('resultCode').textContent = code;
+  document.getElementById('resultName').textContent = archetype.name;
+  document.getElementById('resultDesc').textContent = archetype.desc;
+
+  // Type breakdown
+  const letters = code === 'SBM2' ? ['S','B','M','2'] : code.split('');
+  const validLetters = code === 'SBM2' ? [] : letters;
+  let breakdownHTML = '';
+  if (code !== 'SBM2') {
+    validLetters.forEach(l => {
+      const info = BREAKDOWN_LABELS[l];
+      if (info) {
+        breakdownHTML += `<div class="breakdown-item">
+          <div class="breakdown-letter">${l}</div>
+          <div class="breakdown-text"><strong>${info.axis}</strong>${info.icon} ${info.label}</div>
+        </div>`;
+      }
+    });
+  }
+  document.getElementById('typeBreakdown').innerHTML = breakdownHTML;
+  document.getElementById('typeBreakdown').style.display = code === 'SBM2' ? 'none' : 'grid';
+
+  // Primary rec
+  document.getElementById('primaryModel').innerHTML = tv.name;
+  document.getElementById('primaryTagline').textContent = tv.tagline;
+  document.getElementById('primaryFeatures').innerHTML = tv.features.map(f => `<span class="feature-tag">${f}</span>`).join('');
+
+  // Upsell note
+  const upsellEl = document.getElementById('upsellNote');
+  if (archetype.upsell) {
+    upsellEl.style.display = 'block';
+    upsellEl.innerHTML = `<span class="upsell-icon">💡</span> If space isn't a constraint, the <strong>NU85 98"</strong> takes it to another level entirely. Be wowed by the size, stay for the picture.`;
+  } else {
+    upsellEl.style.display = 'none';
+  }
+
+  // Backup section
+  const backupSection = document.getElementById('backupSection');
+  if (archetype.dream || archetype.backup) {
+    let bHTML = '<div class="rec-section-label">Also Consider</div><div class="backup-row">';
+    if (archetype.dream) {
+      const d = TV_DATA[archetype.dream];
+      bHTML += `<div class="backup-card dream-card">
+        <div class="backup-label">✦ Dream Pick</div>
+        <div class="backup-model">${d.name}</div>
+        <div class="backup-sub">${d.tagline.split('.')[0]}.</div>
+      </div>`;
+    }
+    if (archetype.backup) {
+      const b = TV_DATA[archetype.backup];
+      bHTML += `<div class="backup-card">
+        <div class="backup-label">↓ Step Down</div>
+        <div class="backup-model">${b.name}</div>
+        <div class="backup-sub">${b.tagline.split('.')[0]}.</div>
+      </div>`;
+    }
+    bHTML += '</div>';
+    backupSection.innerHTML = bHTML;
+  } else {
+    backupSection.innerHTML = '';
+  }
+
+  showScreen('screen-result');
+  document.getElementById('progressWrap').style.display = 'none';
+  window.scrollTo(0, 0);
+}
+
+function retake() {
+  currentQ = 0;
+  answers = {};
+  showScreen('screen-intro');
+  document.getElementById('progressWrap').style.display = 'none';
+  window.scrollTo(0, 0);
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+</script>
+</body>
+</html>
