@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>What Kind of TV Person Are You? — LG</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* Fonts inline-defined for offline/preview compatibility */
+</style>
 <style>
   :root {
     --cream: #FAF8F4;
@@ -29,7 +31,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     background: var(--cream);
     color: var(--charcoal);
     min-height: 100vh;
@@ -109,7 +111,7 @@
     margin-bottom: 24px;
   }
   .intro-title {
-    font-family: 'DM Serif Display', serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: clamp(32px, 6vw, 48px);
     line-height: 1.15;
     color: var(--charcoal);
@@ -148,7 +150,7 @@
     border: none;
     border-radius: 12px;
     padding: 18px 48px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
@@ -191,7 +193,7 @@
     margin-left: auto;
   }
   .question-text {
-    font-family: 'DM Serif Display', serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: clamp(20px, 4vw, 28px);
     line-height: 1.35;
     color: var(--charcoal);
@@ -227,7 +229,7 @@
     justify-content: center;
     gap: 4px;
     transition: all 0.18s;
-    font-family: 'DM Sans', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
   .scale-btn .scale-num {
     font-size: 18px;
@@ -264,7 +266,7 @@
     display: flex;
     align-items: center;
     gap: 14px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 15px;
     color: var(--charcoal);
     font-weight: 400;
@@ -292,7 +294,7 @@
     color: var(--mid);
     border-radius: 10px;
     padding: 14px 24px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
@@ -308,7 +310,7 @@
     border: none;
     border-radius: 10px;
     padding: 14px 32px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -340,7 +342,7 @@
     margin-bottom: 12px;
   }
   .result-type-code {
-    font-family: 'DM Serif Display', serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: 52px;
     letter-spacing: 6px;
     color: var(--charcoal);
@@ -383,7 +385,7 @@
     border-radius: 8px;
     background: var(--accent-light);
     color: var(--accent);
-    font-family: 'DM Serif Display', serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: 18px;
     display: flex;
     align-items: center;
@@ -435,7 +437,7 @@
     letter-spacing: 0.05em;
   }
   .primary-model {
-    font-family: 'DM Serif Display', serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: 28px;
     color: var(--charcoal);
     margin-bottom: 4px;
@@ -489,7 +491,7 @@
     margin-bottom: 6px;
   }
   .backup-model {
-    font-family: 'DM Serif Display', serif;
+    font-family: Georgia, 'Times New Roman', serif;
     font-size: 18px;
     color: var(--charcoal);
     margin-bottom: 4px;
@@ -520,7 +522,7 @@
     color: var(--mid);
     border-radius: 12px;
     padding: 16px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
@@ -653,7 +655,7 @@ const QUESTIONS = [
   {
     id: 4, axis: 'usage', type: 'scale', direction: 'C',
     text: 'I love watching films with the lights low — my TV is basically a home cinema.',
-    agree: 'That's so me', disagree: 'Not really me'
+    agree: "That's so me", disagree: "Not really me"
   },
   {
     id: 5, axis: 'usage', type: 'scale', direction: 'G',
@@ -687,7 +689,7 @@ const QUESTIONS = [
   {
     id: 10, axis: 'decor', type: 'scale', direction: 'S',
     text: 'My TV should feel like part of my room — not just a black rectangle on the wall.',
-    agree: 'Part of the room', disagree: 'It\'s just a TV'
+    agree: 'Part of the room', disagree: "It's just a TV"
   },
   {
     id: 11, axis: 'decor', type: 'scale', direction: 'U',
@@ -702,12 +704,4 @@ const QUESTIONS = [
 ];
 
 const SCALE_LABELS = [
-  { val: 5, word: 'Strongly\nAgree' },
-  { val: 4, word: 'Agree' },
-  { val: 3, word: 'Neutral' },
-  { val: 2, word: 'Disagree' },
-  { val: 1, word: 'Strongly\nDisagree' }
-];
-
-const TV_DATA = {
-  W6:        { name: 'OLED W6',    tagline: 'The ultimate wal
+  { val: 5, word: 'Stro
