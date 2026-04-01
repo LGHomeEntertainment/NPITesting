@@ -6,7 +6,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <title>What Kind of TV Person Are You? — LG</title>
+    <title>Find Your TV Personality</title>
     <style>
 
       :root {
@@ -226,7 +226,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-        padding: 28px 20px 24px;
+        padding: 28px 20px 200px;
 	transition: transform 0.25s ease, opacity 0.25s ease;
       }
       .quiz-body.fade-out {
@@ -242,11 +242,11 @@
         margin-bottom: 10px;
       }
       .q-text {
-        font-size: 19px;
+        font-size: 20px;
         font-weight: 500;
         color: var(--charcoal);
-        line-height: 1.45;
-        margin-bottom: 20px;
+        line-height: 1.5;
+        margin-bottom: 40px;
       }
 
       /* SCALE */
@@ -493,10 +493,10 @@
       <div class="screen active" id="screen-intro">
         <div class="intro-logo">LG</div>
         <div class="intro-title">
-          What kind of<br /><strong>TV person</strong><br />are you?
+          Find your <strong>TV personality</strong>
         </div>
         <div class="intro-sub">
-          12 quick questions. <br />And the LG screen made for
+          12 quick questions. A personality type.<br />The LG screen made for
           you.
         </div>
         <div class="intro-pills">
@@ -688,6 +688,7 @@
           sizes: {
             0: {
               tv: "OLED W6",
+	      tvImg: "W6.png",
               rec: "The OLED W6 was made for someone like you — a wallpaper‑thin screen that keeps the room beautifully uncluttered, fading into the wall until it's time to transform your space into a private cinema.",
             },
             1: {
@@ -696,14 +697,17 @@
             },
             2: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 mounts flush to the wall like it was always meant to be there — bringing cinema home with picture quality and scale that make every film feel immersive, cinematic, and unforgettable.",
             },
             3: {
               tv: "OLED W6",
+	      tvImg: "W6.png",
               rec: "The OLED W6 was made for someone like you — a wallpaper‑thin screen that keeps the room beautifully uncluttered, fading into the wall until it's time to transform your space into a private cinema.",
             },
             4: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 mounts flush to the wall like it was always meant to be there — bringing cinema home with picture quality and scale that make every film feel immersive, cinematic, and unforgettable.",
             },
           },
@@ -717,6 +721,7 @@
           sizes: {
             0: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 mounts flush to the wall with a clean, intentional presence — a cinema‑first screen that lets films take centre stage, not the TV itself.",
             },
             1: {
@@ -725,14 +730,17 @@
             },
             2: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 mounts flush to the wall with a clean, intentional presence — a cinema‑first screen that lets films take centre stage, not the TV itself.",
             },
             3: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 mounts flush to the wall with a clean, intentional presence — a cinema‑first screen that lets films take centre stage, not the TV itself.",
             },
             4: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 mounts flush to the wall with a clean, intentional presence — a cinema‑first screen that lets films take centre stage, not the TV itself.",
             },
           },
@@ -762,6 +770,7 @@
             },
             4: {
               tv: "MRGB96",
+	      tvImg: "MRGB96.png",
               rec: 'The 100" MRGB96 delivers colour so rich and a presence so commanding, it redefines what a big-screen living room can feel like.',
             },
           },
@@ -791,6 +800,7 @@
             },
             4: {
               tv: "MRGB96",
+	      tvImg: "MRGB96.png",
               rec: "The MRGB96 at 100\" turns your living room into something else entirely. If you're going big, go properly big.",
             },
           },
@@ -804,6 +814,7 @@
           sizes: {
             0: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 mounts flush to the wall and plays like a dream — a sleek, wall‑hugging design paired with gaming performance that fills the room and feels powerful without overwhelming the space.",
             },
             1: {
@@ -812,14 +823,17 @@
             },
             2: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 mounts flush to the wall and plays like a dream — a sleek, wall‑hugging design paired with gaming performance that fills the room and feels powerful without overwhelming the space.",
             },
             3: {
               tv: "OLED W6",
+	      tvImg: "W6.png",
               rec: "The OLED W6 is the statement piece your setup deserves — wallpaper-thin, Zero Connect Box, and gaming performance that matches the looks, without the clutter.",
             },
             4: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 mounts flush to the wall and plays like a dream — a sleek, wall‑hugging design paired with gaming performance that fills the room and feels powerful without overwhelming the space.",
             },
           },
@@ -841,14 +855,17 @@
             },
             2: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 mounts flush to the wall and delivers smooth, responsive gaming — a clean, wall‑hugging design paired with performance that pulls you straight into the game world.",
             },
             3: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 mounts flush to the wall and delivers smooth, responsive gaming — a clean, wall‑hugging design paired with performance that pulls you straight into the game world.",
             },
             4: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 mounts flush to the wall and delivers smooth, responsive gaming — a clean, wall‑hugging design paired with performance that pulls you straight into the game world.",
             },
           },
@@ -878,6 +895,7 @@
             },
             4: {
               tv: "MRGB96",
+	      tvImg: "MRGB96.png",
               rec: "The MRGB96 is the big swing — colour so vivid and a presence so bold, your gaming setup becomes the centrepiece of the room.",
             },
           },
@@ -891,6 +909,7 @@
           sizes: {
             0: {
               tv: "QNED86",
+	      tvImg: "100Q86.png",
               rec: "The QNED86 is built for gaming without apology — FreeSync Premium, 120Hz refresh rate and Dolby Vision in a package that makes every game feel larger than life.",
             },
             1: {
@@ -899,6 +918,7 @@
             },
             2: {
               tv: "QNED86",
+	      tvImg: "100Q86.png",
               rec: "The QNED86 is built for gaming without apology — FreeSync Premium, 120Hz refresh rate and Dolby Vision in a package that makes every game feel larger than life.",
             },
             3: {
@@ -907,6 +927,7 @@
             },
             4: {
               tv: "QNED86",
+	      tvImg: "100Q86.png",
               rec: "The QNED86 is built for gaming without apology — FreeSync Premium, 120Hz refresh rate and Dolby Vision in a package that makes every game feel larger than life.",
             },
           },
@@ -928,14 +949,17 @@
             },
             2: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 mounts flush to the wall with virtually no gap — a screen that disappears when it needs to and impresses when it doesn't.",
             },
             3: {
               tv: "OLED W6",
+	      tvImg: "W6.png",
               rec: "The OLED W6 is the ultimate quiet statement — a wallpaper‑thin screen that becomes part of your wall, shows art when off, and stuns when on.",
             },
             4: {
               tv: "MRGB96",
+	      tvImg: "MRGB96.png",
               rec: "The MRGB96 brings scale and colour depth to a space that can handle it — a bold but considered statement for a room that was designed to impress.",
             },
           },
@@ -957,14 +981,17 @@
             },
             2: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 brings a flush-mount premium design to everyday viewing — a screen that looks as good switched off as it does switched on.",
             },
             3: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 brings a flush-mount premium design to everyday viewing — a screen that looks as good switched off as it does switched on.",
             },
             4: {
               tv: "MRGB96",
+	      tvImg: "MRGB96.png",
               rec: "The 100\" MRGB96 turns everyday viewing into something you didn't know you were missing. Big, vivid, and genuinely impressive.",
             },
           },
@@ -990,6 +1017,7 @@
             },
             3: {
               tv: "QNED86",
+	      tvImg: "100Q86.png",
               rec: "The QNED86 brings a noticeable upgrade in picture and performance at a scale that fills the room — without asking you to spend like you're going flagship.",
             },
             4: {
@@ -1036,6 +1064,7 @@
           sizes: {
             0: {
               tv: "OLED W6",
+	      tvImg: "W6.png",
               rec: "The OLED W6 is the pinnacle of cinema at home — a wallpaper-thin screen with picture quality so precise, every film plays exactly as it was meant to be seen.",
             },
             1: {
@@ -1044,14 +1073,17 @@
             },
             2: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 delivers gallery-class OLED picture with a flush wall mount — cinema quality wrapped in a screen that belongs in a room like yours.",
             },
             3: {
               tv: "OLED W6",
+	      tvImg: "W6.png",
               rec: "The OLED W6 is the pinnacle of cinema at home — a wallpaper-thin screen with picture quality so precise, every film plays exactly as it was meant to be seen.",
             },
             4: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 brings elite cinema picture to a scale that fills the room — OLED evo quality at a size that makes every film feel like a proper event.",
             },
           },
@@ -1073,14 +1105,17 @@
             },
             2: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 delivers vivid, ultra‑detailed picture quality with Brightness Booster Ultra and OLED evo technology, making everything on screen look more lifelike and vibrant.",
             },
             3: {
               tv: "OLED W6",
+	      tvImg: "W6.png",
               rec: "The OLED W6 represents the absolute peak of picture quality — every technical advantage OLED has to offer, in a screen that exists purely to perform.",
             },
             4: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 at its largest delivers peak OLED picture performance at a scale where every detail becomes impossible to ignore.",
             },
           },
@@ -1110,6 +1145,7 @@
             },
             4: {
               tv: "MRGB96",
+	      tvImg: "MRGB96.png",
               rec: 'The 100" MRGB96 pairs breathtaking scale with deep, expressive colour, creating a cinematic centrepiece that commands the room.',
             },
           },
@@ -1139,6 +1175,7 @@
             },
             4: {
               tv: "QNED86",
+	      tvImg: "100Q86.png",
               rec: "The QNED86 brings sharp, Dolby Vision-ready picture to a proper big screen — a great movie experience at a scale and price that just makes sense.",
             },
           },
@@ -1152,6 +1189,7 @@
           sizes: {
             0: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 balances performance and presence — flush‑mounted to the wall, powered by elite gaming specs, and designed to look as premium as it performs.",
             },
             1: {
@@ -1160,14 +1198,17 @@
             },
             2: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 balances performance and presence — flush‑mounted to the wall, powered by elite gaming specs, and designed to look as premium as it performs.",
             },
             3: {
               tv: "OLED W6",
+	      tvImg: "W6.png",
               rec: "The OLED W6 takes the setup to another level — wallpaper‑thin on the wall, with a Zero Connect Box that keeps cables and consoles off the screen itself. Clean, uncluttered, and backed by gaming performance that fully matches the premium look.",
             },
             4: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 focuses on scale and immersion — a flush‑mounted screen that fills your entire field of view and pulls you into the game.",
             },
           },
@@ -1197,6 +1238,7 @@
             },
             4: {
               tv: "MRGB96",
+	      tvImg: "MRGB96.png",
               rec: 'The MRGB96 delivers a serious gaming experience on a massive 100" screen — smooth, responsive, and built to keep up when the game demands everything.',
             },
           },
@@ -1210,6 +1252,7 @@
           sizes: {
             0: {
               tv: "QNED86",
+	      tvImg: "100Q86.png", 
               rec: "The QNED86 balances smooth gaming performance with a confident, well‑considered look — a screen that delivers in play and still feels right as part of your room.",
             },
             1: {
@@ -1218,14 +1261,17 @@
             },
             2: {
               tv: "QNED86",
+	      tvImg: "100Q86.png",
               rec: "The QNED86 balances smooth gaming performance with a confident, well‑considered look — a screen that delivers in play and still feels right as part of your room.",
             },
             3: {
               tv: "QNED86",
+	      tvImg: "100Q86.png",
               rec: "The QNED86 balances smooth gaming performance with a confident, well‑considered look — a screen that delivers in play and still feels right as part of your room.",
             },
             4: {
               tv: "QNED86",
+	      tvImg: "100Q86.png",
               rec: "The QNED86 balances smooth gaming performance with a confident, well‑considered look — a screen that delivers in play and still feels right as part of your room.",
             },
           },
@@ -1239,6 +1285,7 @@
           sizes: {
             0: {
               tv: "QNED86",
+	      tvImg: "100Q86.png", 
               rec: "The QNED86 delivers smooth, responsive gaming with the features competitive players care about — fast refresh, stable sync, and performance that stays consistent session after session.",
             },
             1: {
@@ -1247,14 +1294,17 @@
             },
             2: {
               tv: "QNED86",
+	      tvImg: "100Q86.png", 
               rec: "The QNED86 delivers smooth, responsive gaming with the features competitive players care about — fast refresh, stable sync, and performance that stays consistent session after session.",
             },
             3: {
               tv: "QNED86",
+	      tvImg: "100Q86.png",
               rec: "The QNED86 delivers smooth, responsive gaming with the features competitive players care about — fast refresh, stable sync, and performance that stays consistent session after session.",
             },
             4: {
               tv: "QNED86",
+	      tvImg: "100Q86.png",
               rec: "The QNED86 delivers smooth, responsive gaming with the features competitive players care about — fast refresh, stable sync, and performance that stays consistent session after session.",
             },
           },
@@ -1268,6 +1318,7 @@
           sizes: {
             0: {
               tv: "OLED W6",
+	      tvImg: "W6.png",
               rec: "The OLED W6 is the ultimate everyday luxury — wallpaper‑thin, beautifully integrated into your space, and breathtaking when it's time to watch.",
             },
             1: {
@@ -1276,14 +1327,17 @@
             },
             2: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 elevates everyday viewing to something special — flush-mount design, premium OLED picture, and a presence that makes the room feel properly considered.",
             },
             3: {
               tv: "OLED W6",
+	      tvImg: "W6.png",
               rec: "The OLED W6 is the ultimate everyday luxury — wallpaper‑thin, beautifully integrated into your space, and breathtaking when it's time to watch.",
             },
             4: {
               tv: "OLED G6",
+	      tvImg: "G6.png",
               rec: "The OLED G6 elevates everyday viewing to something special — flush-mount design, premium OLED picture, and a presence that makes the room feel properly considered.",
             },
           },
@@ -1297,6 +1351,7 @@
           sizes: {
             0: {
               tv: "MRGB96",
+	      tvImg: "MRGB96.png",
               rec: 'The 100" MRGB96 is the living room hero in every sense — colour so rich and a scale so commanding, everyday viewing becomes something else entirely.',
             },
             1: {
@@ -1313,6 +1368,7 @@
             },
             4: {
               tv: "MRGB96",
+	      tvImg: "MRGB96.png",
               rec: 'The 100" MRGB96 is the living room hero in every sense — colour so rich and a scale so commanding, everyday viewing becomes something else entirely.',
             },
           },
@@ -1342,6 +1398,7 @@
             },
             4: {
               tv: "QNED86",
+	      tvImg: "100Q86.png",
               rec: "The QNED86 brings sharper picture, faster refresh, and Dolby Vision for a proper upgrade that doesn't go overboard.",
             },
           },
@@ -1608,7 +1665,7 @@ body.classList.remove('fade-out');
     <div class="result-oneliner">${arch.oneliner}</div>
     <div class="result-story">${arch.story}</div>
     <div class="rec-card">
-      <div class="rec-img">${sizeData.tv}</div>
+      <div class="rec-img"><img src="Images/${sizeData.tvImg}" style="width:100%;height:100%;object-fit:contain;"></div>
       <div class="rec-content">
         <div class="rec-label">Your Screen</div>
         <div class="rec-model">${sizeData.tv}</div>
